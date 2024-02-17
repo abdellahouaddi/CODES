@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body{
+            background: linear-gradient(to right,#00095c,#36007c);
+            
+        }
+        .container{
+            background-color: rgba(254, 254, 254, 0.2);
+        }
+        span{
+            border-bottom: 3px solid green;
+            color: green;
+        }
+        .btn{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-group mt-5">
+        <h1>Generate a <br> <span>Random Password</span></h1>
+        <input type="text" class="form-control w-50 mt-3" id="input" readonly>
+        <i class="bi bi-copy" id="copy" style="cursor: pointer; position: absolute; right: 645px; top: 165px;"></i>
+        <i class="bi bi-check-lg" id="copy2" style="visibility: hidden; position: absolute; right: 645px; top: 165px;"></i>
+        <div class="btn text-light mt-3" id="button">Generate Password</div>
+    </div>
+
+    <script type="text/javascript">
+        let input = document.getElementById("input");
+        let button = document.getElementById("button");
+        let copy = document.getElementById("copy");
+        let copy2 = document.getElementById("copy2");
+        
+        button.addEventListener('click', function(){
+            var length = 12;
+            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            var password = "";
+            for (var i = 0; i < length; i++) {
+                var randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+            input.value = password;
+        });
+
+        copy.addEventListener('click', function(){
+            copyToClipboard(input.value);
+            copy.style.visibility = "hidden";
+            copy2.style.visibility = "visible";
+        });
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
